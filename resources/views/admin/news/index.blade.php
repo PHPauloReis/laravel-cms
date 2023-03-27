@@ -1,8 +1,9 @@
 @extends("admin.template.layout")
 @section("main")
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0">Notícias cadastradas</h4>
+        <a class="btn btn-success" href="{{ route("news.create") }}"><i class="bi bi-plus-lg"></i> Nova</a>
     </div>
     <div class="card-body">
 
