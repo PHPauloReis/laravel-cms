@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\news;
+use App\Http\Requests\CreateNewsRequest;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    private $news;
+
+    public function __construct(News $news)
+    {
+        $this->news = $news;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +34,13 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateNewsRequest $request)
     {
-        //
+        $this->news->create($request->all());
+
+        session()->flash("success", "O registro foi gravado com sucesso!");
+
+        return redirect()->back();
     }
 
     /**
