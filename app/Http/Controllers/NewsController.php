@@ -20,7 +20,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view("admin.news.index");
+        $news = $this->news->orderBy('id', 'desc')->paginate(10);
+
+        return view("admin.news.index", compact('news'));
     }
 
     /**
