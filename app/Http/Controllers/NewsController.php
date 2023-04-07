@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateNewsRequest;
+use App\Http\Requests\NewsRequest;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -36,7 +36,7 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateNewsRequest $request)
+    public function store(NewsRequest $request)
     {
         $this->news->create($request->all());
 
@@ -48,7 +48,7 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(news $news)
+    public function show(News $news)
     {
         //
     }
@@ -56,24 +56,32 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(news $news)
+    public function edit(News $news)
     {
-        //
+        return view("admin.news.edit", compact('news'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, news $news)
+    public function update(NewsRequest $request, News $news)
     {
-        //
+        $news->update($request->all());
+
+        session()->flash("success", "O registro foi atualizado com sucesso!");
+
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(news $news)
+    public function destroy(News $news)
     {
-        //
+        $news->delete();
+
+        session()->flash("success", "O registro foi deletado com sucesso!");
+
+        return redirect()->back();
     }
 }

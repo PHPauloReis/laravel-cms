@@ -25,8 +25,12 @@
 {{--                <td class="align-middle">Saúde</td>--}}
                 <td class="align-middle">{{ $item->created_at->format('d/m/Y à\s H\hi') }}</td>
                 <td class="align-middle">
-                    <button type="button" class="btn btn-sm btn-primary">Editar</button>
-                    <button type="button" class="btn btn-sm btn-danger">Excluir</button>
+                    <form action="{{ route('news.destroy', $item->id) }}" method="post">
+                        @csrf
+                        @method("delete")
+                        <a href="{{ route('news.edit', $item->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                        <button onclick="if (confirm('Você tem certeza que deseja excluir este registro?')) { this.form.submit() }" type="button" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
@@ -36,18 +40,7 @@
         <hr>
 
         <div class="d-flex justify-content-center">
-
             {{ $news->links() }}
-
-{{--            <nav>--}}
-{{--                <ul class="pagination mb-0">--}}
-{{--                    <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-{{--                    <li class="page-item active" aria-current="page">--}}
-{{--                        <a class="page-link" href="#">2</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-{{--                </ul>--}}
-{{--            </nav>--}}
         </div>
 
     </div>

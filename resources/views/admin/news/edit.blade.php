@@ -20,7 +20,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="mb-0">Cadastrar notícia</h4>
+        <h4 class="mb-0">Atualizar notícia</h4>
         <a class="btn btn-primary" href="{{ route("news.index") }}"><i class="bi bi-backspace"></i> Voltar</a>
     </div>
     <div class="card-body">
@@ -28,9 +28,10 @@
         <div class="row">
             <div class="col-md-12">
 
-                <form action="{{ route("news.store") }}" method="post">
+                <form action="{{ route("news.update", $news->id) }}" method="post">
 
                     @csrf
+                    @method("put")
 
                     @include("admin.news.partials.form")
 
