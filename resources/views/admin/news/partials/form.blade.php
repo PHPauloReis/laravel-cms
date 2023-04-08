@@ -2,9 +2,9 @@
     <label for="category_id" class="form-label"><strong>Categoria da notícia</strong></label>
     <select type="text" class="form-select" id="category_id" name="category_id">
         <option value="">--- Selecione ---</option>
-        <option value="1">Policial</option>
-        <option value="2">Política</option>
-        <option value="3">Entretenimento</option>
+        @foreach($categories as $category)
+        <option value="{{ $category->id }}" {{ isset($news) && $category->id === $news->category_id ? "selected='selected'" : "" }}>{{ $category->title }}</option>
+        @endforeach
     </select>
 </div>
 <div class="mb-3">

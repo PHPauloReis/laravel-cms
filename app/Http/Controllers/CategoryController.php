@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NewsRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use App\Models\News;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class CategoryController extends Controller
 {
-    private $news;
     private $category;
 
-    public function __construct(News $news, Category $category)
+    public function __construct(Category $category)
     {
-        $this->news = $news;
         $this->category = $category;
     }
 
@@ -23,9 +20,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = $this->news->orderBy('id', 'desc')->paginate(10);
+        $categories = $this->category->orderBy('id', 'desc')->paginate(10);
 
-        return view("admin.news.index", compact('news'));
+        return view("admin.category.index", compact('categories'));
     }
 
     /**
@@ -33,17 +30,15 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->all();
-
-        return view("admin.news.create", compact('categories'));
+        return view("admin.category.create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NewsRequest $request)
+    public function store(CategoryRequest $request)
     {
-        $this->news->create($request->all());
+        $this->category->create($request->all());
 
         session()->flash("success", "O registro foi gravado com sucesso!");
 
@@ -53,7 +48,7 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(News $news)
+    public function show(Category $category)
     {
         //
     }
@@ -61,19 +56,17 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(News $news)
+    public function edit(Category $category)
     {
-        $categories = $this->category->all();
-
-        return view("admin.news.edit", compact('news', 'categories'));
+        return view("admin.category.edit", compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(NewsRequest $request, News $news)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $news->update($request->all());
+        $category->update($request->all());
 
         session()->flash("success", "O registro foi atualizado com sucesso!");
 
@@ -83,9 +76,9 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news)
+    public function destroy(Category $category)
     {
-        $news->delete();
+        $category->delete();
 
         session()->flash("success", "O registro foi deletado com sucesso!");
 
