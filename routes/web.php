@@ -15,14 +15,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware('auth')->group(function() {
 
-Route::resource("noticias", NewsController::class)
-    ->names("news")
-    ->parameters(["noticias" => "news"]);
+    Route::resource("noticias", NewsController::class)
+        ->names("news")
+        ->parameters(["noticias" => "news"]);
 
-Route::resource("categorias", CategoryController::class)
-    ->names("category")
-    ->parameters(["categorias" => "category"]);
+    Route::resource("categorias", CategoryController::class)
+        ->names("category")
+        ->parameters(["categorias" => "category"]);
+
+});
 
 Route::get('/', function () {
     return view('welcome');
