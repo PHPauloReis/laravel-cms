@@ -32,7 +32,11 @@
                         @csrf
                         @method("delete")
                         <a href="{{ route('news.edit', $item->id) }}" class="btn btn-sm btn-primary">Editar</a>
+
+                        @can('excluir-noticias')
                         <button onclick="if (confirm('Você tem certeza que deseja excluir este registro?')) { this.form.submit() }" type="button" class="btn btn-sm btn-danger">Excluir</button>
+                        @endcan
+
                     </form>
                 </td>
             </tr>

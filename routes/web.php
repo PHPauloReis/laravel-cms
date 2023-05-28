@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function() {
         ->names("news")
         ->parameters(["noticias" => "news"]);
 
+    Route::delete('noticias/{news}', [NewsController::class, 'destroy'])
+        ->name('news.destroy')
+        ->middleware('can:excluir-noticias');
+
     Route::resource("categorias", CategoryController::class)
         ->names("category")
         ->parameters(["categorias" => "category"]);
