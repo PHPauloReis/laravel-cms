@@ -16,6 +16,10 @@
     <textarea class="form-control" id="subtitle" name="subtitle">{{ $news->subtitle ?? old('subtitle') }}</textarea>
 </div>
 <div class="mb-3">
+    <label for="cover" class="form-label">Selecione uma imagem do seu computador</label>
+    <input class="form-control" type="file" name="cover" id="cover">
+</div>
+<div class="mb-3">
     <label for="text" class="form-label"><strong>Texto da notícia</strong></label>
     <textarea class="form-control" id="text" name="text" rows="8">{{ $news->text ?? old('text') }}</textarea>
 </div>
