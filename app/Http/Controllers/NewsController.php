@@ -6,6 +6,9 @@ use App\Http\Requests\NewsRequest;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Image;
+use Intervention\Image\ImageManager;
 
 class NewsController extends Controller
 {
@@ -43,11 +46,20 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        $file = $request->file('cover');
-        $file->store('news');
-
         $data = $request->all();
-        $data['cover'] = $file->hashName();
+        $file = $request->file('cover');
+
+        if (!empty($file)) {
+            $file->store('news');
+            $data['cover'] = $file->hashName();
+
+            // Criar uma nova instância do ImageManager
+            $imageManager = new ImageManager(new Driver());
+
+            $image = $imageManager->read(storage_path('app/news/') . $data['cover']);
+            $image->resize(300, 200);
+            $image->save(storage_path('app/news/') . 'thumbnails/' . $data['cover']);
+        }
 
         $this->news->create($data);
 
