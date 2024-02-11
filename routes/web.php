@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function() {
 });
 
 Route::get('/', [SiteController::class, 'home']);
+Route::get('/news/{news}', [SiteController::class, 'read'])->name('newsRead');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
