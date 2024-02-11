@@ -60,7 +60,7 @@
                         <span class="opener">Categorias</span>
                         <ul>
                             @foreach($categories as $category)
-                            <li><a href="#">{{ $category->title }}</a></li>
+                            <li><a href="{{ route('newsCategory', $category->token) }}">{{ $category->title }}</a></li>
                             @endforeach
                         </ul>
                     </li>

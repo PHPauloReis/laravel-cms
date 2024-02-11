@@ -17,6 +17,11 @@ class News extends Model
         return Str::substr($this->attributes['text'], 0, 250) . '...';
     }
 
+    public function getSlugTitleAttribute()
+    {
+        return Str::slug($this->attributes['title']);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

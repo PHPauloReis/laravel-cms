@@ -13,6 +13,11 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory(5)->create();
+        Category::factory()->create(['title' => 'Economia', 'token' => 'economia']);
+        Category::factory()->create(['title' => 'Política', 'token' => 'politica']);
+        Category::factory()->create(['title' => 'Policial', 'token' => 'policial']);
+        Category::factory()->create(['title' => 'Entretenimento', 'token' => 'entretenimento']);
+        Category::factory()->create(['title' => 'Mundo', 'token' => 'mundo']);
+        Category::factory()->create(['title' => 'Tecnologia', 'token' => 'tecnologia']);
     }
 }

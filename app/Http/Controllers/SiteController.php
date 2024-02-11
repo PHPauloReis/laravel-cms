@@ -27,4 +27,13 @@ class SiteController extends Controller
 
         return view('site.news', compact('news'));
     }
+
+    public function newsCategory($token)
+    {
+        $category = Category::where('token', $token)->first();
+
+        $news = News::orderBy('id', 'desc')->where('category_id', $category->id)->get();
+
+        return view('site.news', compact('news'));
+    }
 }
