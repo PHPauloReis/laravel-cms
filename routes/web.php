@@ -44,6 +44,7 @@ Route::get('/', [SiteController::class, 'home']);
 Route::get('/noticias/categoria/{token}', [SiteController::class, 'newsCategory'])->name('newsCategory');
 Route::get('/noticias/{news}/{slug}', [SiteController::class, 'read'])->name('newsRead');
 Route::get('/noticias', [SiteController::class, 'news'])->name('newsIndex');
+Route::get('/noticias/buscar', [SiteController::class, 'search'])->name('newsSearch');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -43,8 +43,8 @@
 
             <!-- Search -->
             <section id="search" class="alt">
-                <form method="post" action="#">
-                    <input type="text" name="query" id="query" placeholder="Search" />
+                <form method="get" action="{{ route('newsSearch') }}">
+                    <input type="text" name="keyword" id="keyword" placeholder="O que você procura?" />
                 </form>
             </section>
 
