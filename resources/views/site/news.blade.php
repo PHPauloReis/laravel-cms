@@ -1,28 +1,9 @@
 @extends('site.template')
 @section('main')
-    <!-- Banner -->
-    <section id="banner">
-        <div class="content">
-            <header>
-                <h1>{{ $topNews->title }}</h1>
-                <p>{{ $topNews->subtitle }}</p>
-            </header>
-            <p>{{ $topNews->summary }}</p>
-            <ul class="actions">
-                <li><a href="{{ route('newsRead', $topNews) }}" class="button big">Leia mais</a></li>
-            </ul>
-        </div>
-        @if(!empty($topNews->cover))
-            <span class="image object">
-                        <img src="{{ $topNews->cover }}" alt="" />
-                    </span>
-        @endif
-    </section>
-
     <!-- Section -->
     <section>
         <header class="major">
-            <h2>Últimas notícias</h2>
+            <h2>Notícias</h2>
         </header>
         <div class="posts">
             @foreach($news as $newsItem)

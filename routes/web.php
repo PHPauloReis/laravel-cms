@@ -18,22 +18,31 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware('auth')->group(function() {
 
-    Route::resource("noticias", NewsController::class)
-        ->names("news")
-        ->parameters(["noticias" => "news"]);
+    Route::prefix('admin')->group(function() {
 
-    Route::delete('noticias/{news}', [NewsController::class, 'destroy'])
-        ->name('news.destroy')
-        ->middleware('can:excluir-noticias');
+        Route::get('', function() {
+            return redirect()->route('news.index');
+        });
 
-    Route::resource("categorias", CategoryController::class)
-        ->names("category")
-        ->parameters(["categorias" => "category"]);
+        Route::resource("noticias", NewsController::class)
+            ->names("news")
+            ->parameters(["noticias" => "news"]);
+
+        Route::delete('noticias/{news}', [NewsController::class, 'destroy'])
+            ->name('news.destroy')
+            ->middleware('can:excluir-noticias');
+
+        Route::resource("categorias", CategoryController::class)
+            ->names("category")
+            ->parameters(["categorias" => "category"]);
+
+    });
 
 });
 
 Route::get('/', [SiteController::class, 'home']);
-Route::get('/news/{news}', [SiteController::class, 'read'])->name('newsRead');
+Route::get('/noticias/{news}', [SiteController::class, 'read'])->name('newsRead');
+Route::get('/noticias', [SiteController::class, 'news'])->name('newsIndex');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
